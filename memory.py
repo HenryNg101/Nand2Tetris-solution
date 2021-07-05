@@ -2,6 +2,7 @@ push_operation_general = "\n@SP\nA=M\nM=D\n@SP\nM=M+1\n"
 pop_operation_general = "\n@SP\nM=M-1\nA=M\nD=M\n"
 standard_segments = {'local':'LCL','argument':'ARG','this':'THIS','that':'THAT'}
 
+#Process standard segments (defined above) (works well !!)
 def normal_type(operation, segment, value):
     value = int(value)
     value1 = value
@@ -31,15 +32,18 @@ def normal_type(operation, segment, value):
             value1 -=1
     return result
 
+#Process constants (works well !!)
 def constant(value):
     return "\n@" + str(value) + "\nD=A\n" + push_operation_general + "\n"
 
+#Process static segment (worked !!)
 def static(operation, value, filename):
     if operation == "push":
         return "@" + filename + "." + str(value) + "\nD=M" + push_operation_general + "\n"
     else:
-        return pop_operation_general + "@" + filename + "." + str(value) + "\nA=M\nM=D\n"
+        return pop_operation_general + "@" + filename + "." + str(value) + "\nM=D\n"
 
+#Process "temp" memory segment (works well !!)
 def temp(operation, value):
     value = int(value)
     result = ""
@@ -48,7 +52,7 @@ def temp(operation, value):
         while value > 0:
             result += "\nA=A+1"
             value -= 1
-        result += (push_operation_general + "\n")
+        result += ("\nD=M\n" + push_operation_general + "\n")
     else:
         result = pop_operation_general + "@5"
         while value > 0:
@@ -57,10 +61,11 @@ def temp(operation, value):
         result += "\nM=D\n"
     return result
 
+#Process pointer segment (worked !!)
 def pointer(operation, value):
-    value = bool(value)
+    value = bool(int(value))
     segment = "THAT" if value else "THIS"
     if operation == "push":
-        return "@" + segment + "\nA=M\nD=M" + push_operation_general + "\n"
+        return "@" + segment + "\nD=M" + push_operation_general + "\n"
     else:
-        return pop_operation_general + "@" + segment + "\nA=M\nM=D\n"
+        return pop_operation_general + "@" + segment + "\nM=D\n"

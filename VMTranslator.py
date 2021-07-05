@@ -3,7 +3,7 @@ import operations
 import memory
 
 in_file = open(sys.argv[1], "r")
-file_name = sys.argv[1].replace('.asm','')
+file_name = sys.argv[1].split('/')[-1].replace('.vm','')
 out_file = open(sys.argv[1].replace(".vm", ".asm"), "w")
 
 code_data = in_file.read().split("\n")
