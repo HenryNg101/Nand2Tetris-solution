@@ -9,7 +9,7 @@ def normal_type(operation, segment, value):
     segment = standard_segments[segment]
     result = ""
     if operation == "push":
-        result = "@" + segment
+        result = "\n@" + segment
         while value > 0:
             result += "\nM=M+1"
             value -= 1
@@ -20,7 +20,7 @@ def normal_type(operation, segment, value):
             result += "M=M-1\n"
             value1 -=1
     else:
-        result = pop_operation_general + "@" + segment
+        result = pop_operation_general + "\n@" + segment
         while value > 0:
             result += "\nM=M+1"
             value -=1

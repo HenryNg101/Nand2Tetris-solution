@@ -1,6 +1,8 @@
 import sys
 import operations
 import memory
+import branching
+import function
 
 in_file = open(sys.argv[1], "r")
 file_name = sys.argv[1].split('/')[-1].replace('.vm','')
@@ -15,6 +17,7 @@ for line in code_data:
     line = line.strip()
     if len(line) > 0:
         if line[0:2] != "//":
+            line = line.split("//")[0].strip()
             actual_code.append(line)
 
 for line in actual_code:
@@ -26,7 +29,8 @@ for line in actual_code:
         else:
             line = operations.process(line[0])
     elif len(line) == 2:
-        line = memory.constant(line[1])
+        label_types = {'label':'label_processing','goto':'unconditional_jump','if-goto':'conditional_jump'}
+        line = getattr(branching, label_types[line[0]])(line[1])
     elif len(line) == 3:
         if line[1] not in ['local', 'argument', 'this', 'that']:
             if line[1] == "static":
