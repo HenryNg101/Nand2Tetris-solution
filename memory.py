@@ -7,7 +7,6 @@ def normal_type(operation, segment, value):
     value = int(value)
     value1 = value
     segment = standard_segments[segment]
-    result = ""
     if operation == "push":
         result = "\n@" + segment
         while value > 0:
@@ -34,19 +33,18 @@ def normal_type(operation, segment, value):
 
 #Process constants (works well !!)
 def constant(value):
-    return "\n@" + str(value) + "\nD=A\n" + push_operation_general + "\n"
+    return "\n@" + value + "\nD=A\n" + push_operation_general + "\n"
 
 #Process static segment (worked !!)
 def static(operation, value, filename):
     if operation == "push":
-        return "@" + filename + "." + str(value) + "\nD=M" + push_operation_general + "\n"
+        return "\n@" + filename + "." + str(value) + "\nD=M" + push_operation_general + "\n"
     else:
         return pop_operation_general + "@" + filename + "." + str(value) + "\nM=D\n"
 
 #Process "temp" memory segment (works well !!)
 def temp(operation, value):
     value = int(value)
-    result = ""
     if operation == "push":
         result = "@5"
         while value > 0:
@@ -66,6 +64,6 @@ def pointer(operation, value):
     value = bool(int(value))
     segment = "THAT" if value else "THIS"
     if operation == "push":
-        return "@" + segment + "\nD=M" + push_operation_general + "\n"
+        return "\n@" + segment + "\nD=M" + push_operation_general + "\n"
     else:
         return pop_operation_general + "@" + segment + "\nM=D\n"
