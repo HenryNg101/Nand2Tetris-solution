@@ -1,3 +1,4 @@
+#This module is responsible for stack arithmetic processing
 #In Hack Assembly, valid operations are: A+B, A-B, A&B, A|B, !A (Or !B), -A(Or -B)
 
 two_operands_ops = {"add":"+", "sub":"-","and":"&","or":"|"}

@@ -1,3 +1,5 @@
+#This module process branching operations
+
 def label_processing(label_name):
     return "\n(" + label_name + ")\n"
 

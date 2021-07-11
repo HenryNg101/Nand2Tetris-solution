@@ -1,8 +1,10 @@
+#This module is responsible for memory access operations
+
 push_operation_general = "\n@SP\nA=M\nM=D\n@SP\nM=M+1\n"
 pop_operation_general = "\n@SP\nM=M-1\nA=M\nD=M\n"
 standard_segments = {'local':'LCL','argument':'ARG','this':'THIS','that':'THAT'}
 
-#Process standard segments (defined above) (works well !!)
+#Process standard segments
 def normal_type(operation, segment, value):
     value = int(value)
     value1 = value
@@ -31,18 +33,24 @@ def normal_type(operation, segment, value):
             value1 -=1
     return result
 
-#Process constants (works well !!)
+#Process constants
 def constant(value):
     return "\n@" + value + "\nD=A\n" + push_operation_general + "\n"
 
-#Process static segment (worked !!)
-def static(operation, value, filename):
+#Process static segment
+def static(operation, value, filename, function):
     if operation == "push":
-        return "\n@" + filename + "." + str(value) + "\nD=M" + push_operation_general + "\n"
+        if len(function) == 0:
+            return "\n@" + filename + "." + str(value) + "\nD=M" + push_operation_general + "\n"
+        else:
+            return "\n@" + filename + "." + function + "." + str(value) + "\nD=M" + push_operation_general + "\n"
     else:
-        return pop_operation_general + "@" + filename + "." + str(value) + "\nM=D\n"
+        if len(function) == 0:
+            return pop_operation_general + "@" + filename + "." + str(value) + "\nM=D\n"
+        else:
+            return pop_operation_general + "@" + filename + "." + function + "." + str(value) + "\nM=D\n"
 
-#Process "temp" memory segment (works well !!)
+#Process "temp" memory segment
 def temp(operation, value):
     value = int(value)
     if operation == "push":
@@ -59,7 +67,7 @@ def temp(operation, value):
         result += "\nM=D\n"
     return result
 
-#Process pointer segment (worked !!)
+#Process pointer segment
 def pointer(operation, value):
     value = bool(int(value))
     segment = "THAT" if value else "THIS"

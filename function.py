@@ -1,3 +1,5 @@
+#This module is responsible for processing functions
+
 push_data = "\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1\n"
 
 #Handling command "function f k"
