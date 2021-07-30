@@ -16,14 +16,11 @@ class Tokenizer:
         self.tokens = self.clean_code(code)
 
     """Clean comments (multi-line and single-line comments), newline and some spaces, and split to get all tokens"""
-
     def clean_code(self, code):
         # Clean single-line comments
         code = re.sub('//.*', '', code)
         # Clean multi-line comments
         code = re.sub('/\*.*?\*/', '', code, flags=re.DOTALL)
-        # 2 problems with this code
-        # String processing, and symbols processing
         code = code.replace('\n', ' ').strip()
         code = code.replace('\t', ' ')
         return self.seperate_tokens(code)
@@ -56,6 +53,7 @@ class Tokenizer:
                 id += 1
         return tokens
 
+    """Decide the type of token passed to the function"""
     def tag_type(self, token):
         #Boolean list for checking all conditions to decide which is the type of a token 
         bool_ls = [token in keyword, token in symbol, token.isnumeric(), token[0] == '"']
