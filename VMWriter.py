@@ -1,41 +1,30 @@
 #This module is used to emits VM commands, using the VM command syntax
 
-class Writer:
-    def __init__(self, file_name):
-        self.class_name = file_name
+def writePush(self, segment, value):
+    return "push " + segment + " " + str(value) + "\n"
 
-    """The main function to write VM, this function call other function"""
-    def generate_code(self, top):
-        #First, take the class name (For function name, etc)
-        #Then, process class variable declaration (until there's no variable to process)
-        #Then, process methods:
-        #- For each methods, process method parameters (if there's any)
-        #- Then, process expressions. For each expression, check if there's any expression inside expression, if yes, call appropriate function to process that expression, and so on.
-        pass
+def writePop(self, segment, value):
+    return "pop " + segment + " " + str(value) + "\n"
 
-    def writePush(self):
-        pass
+def writeArithmetic(self, arithmetic):
+    return arithmetic + "\n"
 
-    def writePop(self):
-        pass
+def writeLabel(self, label):
+    return "label " + label + "\n"
 
-    def writeArithmetic(self):
-        pass
+def writeGoto(self, label):
+    return "goto " + label + "\n"
 
-    def writeLabel(self):
-        pass
+def writeIf(self, label):
+    return "if-goto " + label + "\n"
 
-    def writeGoto(self):
-        pass
+#Call a function after passed n arguments
+def writeCall(self, func_name, args):
+    return "call " + func_name + " " + str(args) +"\n"
 
-    def writeIf(self):
-        pass
+#Write a function with n local variables
+def writeFunction(self, func_name, vars):                   
+    return "function " + func_name + " " + str(vars) + "\n"
 
-    def writeCall(self):
-        pass
-
-    def writeFunction(self):
-        pass
-
-    def writeReturn(self):
-        pass
+def writeReturn(self):
+    return "return"
