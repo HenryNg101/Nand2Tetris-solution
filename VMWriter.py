@@ -1,30 +1,32 @@
 #This module is used to emits VM commands, using the VM command syntax
 
-def writePush(self, segment, value):
+#push segment index => Push the value of segment[index] onto the stack
+def writePush(segment, value):
     return "push " + segment + " " + str(value) + "\n"
 
-def writePop(self, segment, value):
+#pop segment index Pop the top stack value and store it in segment[index].
+def writePop(segment, value):
     return "pop " + segment + " " + str(value) + "\n"
 
-def writeArithmetic(self, arithmetic):
+def writeArithmetic(arithmetic):
     return arithmetic + "\n"
 
-def writeLabel(self, label):
+def writeLabel(label):
     return "label " + label + "\n"
 
-def writeGoto(self, label):
+def writeGoto(label):
     return "goto " + label + "\n"
 
-def writeIf(self, label):
+def writeIf(label):
     return "if-goto " + label + "\n"
 
 #Call a function after passed n arguments
-def writeCall(self, func_name, args):
+def writeCall(func_name, args):
     return "call " + func_name + " " + str(args) +"\n"
 
 #Write a function with n local variables
-def writeFunction(self, func_name, vars):                   
+def writeFunction(func_name, vars):                   
     return "function " + func_name + " " + str(vars) + "\n"
 
-def writeReturn(self):
-    return "return"
+def writeReturn():
+    return "return\n"

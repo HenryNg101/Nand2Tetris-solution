@@ -1,14 +1,13 @@
-import JackParser
+import CompilationEngine
 import sys
-import xml.etree.ElementTree as ET
 import pathlib
 
 def compile(path):
     in_file = open(path, 'r')
-    out_file = open(path.replace(".jack", "_test.xml"), 'w')
+    out_file = open(path.replace(".jack", "_test.vm"), 'w')
     code_data = in_file.read()
-    obj = JackParser.Parser(code_data)
-    out_file.write(obj.xml)
+    obj = CompilationEngine.Parser(code_data)
+    out_file.write(obj.code)
 
 in_name = sys.argv[1]
 
