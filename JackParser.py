@@ -1,5 +1,5 @@
 #Input: Tokenizers (keywords, characters, etc)
-#Output: Non-terminal and terminal language elements (In xxx.xml, with "xxx" is the name of .jack file)
+#Output: Non-terminal and terminal language elements (In xxx.xml, with "xxx" is the name of .jack file), aka parse tree
 
 # Notes for reading the code:
 #   - Each method in the class is responsible for a non-terminal element 
@@ -22,12 +22,12 @@ class Parser:
     def __init__(self, code):
         self.obj = JackTokenizer.Tokenizer(code)     #Token input, a list of elements
         self.top = self.CompileClass(self.obj)
-        self.xml = ET.tostring(self.top, encoding='unicode')
+        self.code = ET.tostring(self.top, encoding='unicode')
         #Make the XML result look good (with tab) using XML DOM Minidom
-        self.xml = minidom.parseString(self.xml)
-        self.xml = self.xml.toprettyxml()
-        self.xml = re.sub('<\?xml .*\?>\n', '', self.xml)       #Remove XML prolog
-        self.xml = ET.tostring(ET.fromstring(self.xml), short_empty_elements=False).decode('utf-8')
+        self.code = minidom.parseString(self.code)
+        self.code = self.code.toprettyxml()
+        self.code = re.sub('<\?xml .*\?>\n', '', self.code)       #Remove XML prolog
+        self.code = ET.tostring(ET.fromstring(self.code), short_empty_elements=False).decode('utf-8')
 
     def CompileClass(self, obj):
         token_ls = obj.tokens       #List of non-terminal elements
