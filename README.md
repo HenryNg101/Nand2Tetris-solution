@@ -18,7 +18,9 @@ ALU (Arithmetic Logic Unit), to do some bitwise and numerical arithmetic operati
 ### Sequential Logic (Persistence storage)
 In computer, it uses a clockto represent the time, it often cycles between 0 and 1, ot "tick" and "tock". To start with sequential logic, you need a special chip to start with, which is Data Flip-Flop chip. This chip contains will output the inputted data of previous clock's cycle (which means that, out(t) = in(t-1), t is the clock's time). Since the DFF can't contain the same data over time, you need a register to do that. A register is similar to DFF, except that it has the other option to store same data over time. From there you build 16-bit registers, and small RAM (consists of registers), and bigger RAMs contains smaller RAMs.
 
-
+However, there's a special case, which is program counter. It's a chip that can increase it's value over time, when clock ticks. It's very important to be used to count and find current assembly instruction of a program, when you can reset (go back to beginning of the program), load with specific value (branching and jumps).
 
 ### Computer architecture (Build a complete computer)
+Based on Von Neumman architecture, a computer consists of memory and a CPU. The memory stores data and instructions, CPU process instructions (perform arithmetic operations with ALU, store immediate results in registers).
+
 ### Assembly language (Low-level instructions for computer)
