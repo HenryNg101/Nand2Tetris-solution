@@ -42,9 +42,13 @@ A tool to translate VM code (bytecode) into assembly (Hack assembly) language. V
 
 There are 4 different types of operations in VM language: Arithmetic/Logical commands (For calculations), Memory access (push/pop in memory stack) commands, branching commands (for creating labels and jump to label) and function commands (function creation, function calls and return). Read more in the book and watch videos for more information.
 
+For the tool usage, go to the "VM Translator" directory and check README.md
+
 ### Compiler (Jack Compiler)
 A tool to compile high-level language code (Jack) into VM code (or bytecode). Jack language is kinda like Java. 
 
 For a compiler, there are several steps to compile from high-level code to intermediate code (VM code). They includes tokenization (breaks down the code base into different lexical elements (keywords, values, etc)), parsing (from simple lexoical elements that we got by breaking down the code base, we try to build more complex structure (statements, expression, etc) from that code, which results in parsing tree, often stored as XML), and code generation (Generate VM code from the parsing tree). For more details on how to do each step for Jack language, with different algorithms, read more in the book and videos.
+
+For the tool usage, go to the "Jack Compiler" directory and check README.md
 
 ### OS (Haven't complete yet)
